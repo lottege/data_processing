@@ -5,10 +5,9 @@
 This script scrapes IMDB and outputs a CSV file with highest rated tv series.
 '''
 import csv
-import requests
+import re
 
 from pattern.web import URL, DOM, plaintext, Element
-from bs4 import BeautifulSoup
 
 TARGET_URL = "http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating,desc&start=1&title_type=tv_series"
 BACKUP_HTML = 'tvseries.html'
@@ -16,47 +15,84 @@ OUTPUT_CSV = 'tvseries.csv'
 
 
 def extract_tvseries(dom):
-    '''
-    Extract a list of highest rated TV series from DOM (of IMDB page).
 
-    Each TV series entry should contain the following fields:
-    - TV Title
-    - Rating
-    - Genres (comma separated if more than one)
-    - Actors/actresses (comma separated if more than one)
-    - Runtime (only a number!)
-    '''
-
-    # ADD YOUR CODE HERE TO EXTRACT THE ABOVE INFORMATION ABOUT THE
-    # HIGHEST RATED TV-SERIES
-    # NOTE: FOR THIS EXERCISE YOU ARE ALLOWED (BUT NOT REQUIRED) TO IGNORE                       
-    # UNICODE CHARACTERS AND SIMPLY LEAVE THEM OUT OF THE OUTPUT.
+    # declare the observed URL
     url = URL(TARGET_URL)
+    
+    # download the URL to read the code
     dom = DOM(url.download(cached=True))
 
-    for e in dom('div[class="lister-item-content"]')[0:4]:
-        print (e('a')[0].content) 
-        print (e('div[class="inline-block ratings-imdb-rating"] strong')[0].content)
+    # initialize list for the data we need
+    data = []
+
+    # iterate over parts of the list of tv series
+    for e in dom('div[class="lister-item-content"]'):
+        # look for title and accept all symbols
+        title =  e('a')[0].content.encode("utf-8")
+        
+        # look for rating
+        rating = e('div[class="inline-block \
+                    ratings-imdb-rating"] strong')[0].content
+        
+        # initialize list for genres
+        genre = []
+        
+        # calculate amount of genres
         alengte = len(e('span[class="genre"]'))
+        
+        # iterate over all genres
         for a in range(alengte):
-            print (e('span[class="genre"]')[a].content)
-            blengte = len(e('a'))
-            #print blengte
+            # look for genres and accept all symbols
+            genres = e('span[class="genre"]')[a].content.encode("utf-8")
+            
+            # add new genre to list of genres
+            genre.append(genres)
+
+        # remove extra whitespace and join list with commas in between
+        stripped_genres = (",".join([s.strip() for s in genre]))    
+        
+        # initialize list for actors
+        actors = []
+        
+        # calculate amount of actors
+        blengte = len(e('a')) 
+        
+        # start looking at position of first actor
         for b in range(12, blengte):
-            print (e('a')[b].content "," end='')
+            # look for actor and make sure all symbols are accepted
+            actor = e('a')[b].content.encode("utf-8")
+            
+            # add new actor to list
+            actors.append(actor)
+        
+        # join actors with commas in between
+        stripped_actors = (", ".join(actors))    
+        
+        # look for runtime
+        runtime = e('span[class="runtime"]')[0].content
+        
+        # keep the digits, throw away 'min'
+        runtime_digits = ''.join([i for i in runtime if i.isdigit()])
 
+        # add the new data to data list
+        data.append((title, rating, stripped_genres, 
+                     stripped_actors, runtime_digits))
 
-    return []  # replace this line as well as appropriate
+    # return the collected data
+    return data  
 
 
 def save_csv(f, tvseries):
-    '''
-    Output a CSV file containing highest rated TV-series.
-    '''
+    
     writer = csv.writer(f)
     writer.writerow(['Title', 'Rating', 'Genre', 'Actors', 'Runtime'])
 
-    # ADD SOME CODE OF YOURSELF HERE TO WRITE THE TV-SERIES TO DISK
+    # calculate the lenght of the list
+    lengte = len(tvseries)
+    
+    # iterate over list and write row per row
+    for a in range(lengte):
+        writer.writerow(tvseries[a])
 
 if __name__ == '__main__':
     # Download the HTML file
