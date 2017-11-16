@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <h1>Werk uren DRIVE 2017 </h1>
+    </head>
+    <body>
+        <script>
+        window.onload = function() {
+        d3.json("uren.json", function(error, data) {
+        if (error) return console.warn(error);
+        console.log(data);
+        console.log("print");
+        });
+        }
+        </script>
+        <script src="barchart.js"></script>
+    </body>
+</html>
+
+<meta charset="utf-8">
+
+<style>
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: black;
+  font: 18px sans-serif;
+  text-anchor: middle;
+  visibility: hidden;
+}
+
+.axis text {
+  fill: black;
+  font: 12px sans-serif;
+  visibility: visible;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+rect:hover {
+    fill: lightsteelblue;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  font-family: arial;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+</style>
+
+<svg class="chart"></svg>
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script>
+
+var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 920 - margin.left - margin.right,
+    barHeight = 420,
+    height = 500 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .ticks(12)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .ticks(8)
+    .orient("left");
+
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+    return "<strong>Uren:</strong> <span style='color:lightsteelblue'>" + d.uren + "</span>";
+    })
+
+var chart = d3.select(".chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+chart.call(tip);
+
+d3.json("uren.json", function(error, data) {
+    data.forEach(function(d) {
+    d.uren = +d.uren;
+    });
+
+  x.domain(data.map(function(d) { return d.maand; }));
+  y.domain([0, d3.max(data, function(d) { return d.uren; })]);
+
+  var barWidth = width / data.length;
+
+  chart.attr("height", barHeight * data.length);
+
+  var bar = chart.selectAll("g")
+      .data(data)
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  chart.selectAll(".chart")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "chart")
+      .attr("x", function(d) { return x(d.maand); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.uren); })
+      .attr("height", function(d) { return height - y(d.uren); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+});
+
+</script>
