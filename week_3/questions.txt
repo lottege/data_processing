@@ -1,14 +1,26 @@
 Questions week 3
 
 1. How can D3 access and change the DOM? What do select and selectAll do?
-    Byy naming for example the class with .class or the id with #id, same as in CSS.
+    By naming for example the class with .class or the id with #id, same as in CSS. SelectAll selects all parts of the same type
 
 2. What are the d and i in function(d){} and function(d, i){}?
+    i represents the number of the object in the data and d the data itself
 
 3. Write sample lines of JavaScript to add a div element with class “barChart1” and to add an svg element with class “barChart2” with square dimensions.
+    These initialization sets square bars
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([0, 50], 0.1);
 
+    var y = d3.scale.linear()
+        .range([50, 0]);
 4. Describe append, update, enter, and exit at a high level. What does “selectAll + data + enter + append” refer to?
+    append adds an svg element
+    update as the name says updates svg elements with new values
+    enter creates new nodes for incoming data
+    exit removes outgoing nodes that are no longer needed
 
 5. What are the main differences between drawing a bar chart with HTML and SVG?
+    SVG does many things for you and thinks with you, for example SVG shows the amount of ticks what will suit your chart the best.
 
 6. In drawing the simple bar chart with D3 and SVG, what elements were appended, and what parts of the graph did these elements correspond to?
+    The rectangles, and the text in the rectangles.
