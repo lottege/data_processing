@@ -1,0 +1,12 @@
+Design choices barchart
+
+I chose the color 'coral' as the main color of the chart.
+I picked this color because the chart represents hours of work
+so I wanted it to be a busy color but not too shouting.
+
+For the tooltip I picked colors that would give a nice balance and are not busy.
+The interactivity of the tooltip popping up and the bar changing color is already busy
+so I wanted the tooltip to have calm colors like blue grey and white.
+
+I chose this orientation of the axes because it fits better for the months of the year.
+
