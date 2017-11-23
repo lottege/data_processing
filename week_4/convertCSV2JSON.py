@@ -11,14 +11,14 @@
 import json
 import csv
 
-csvfile = open('Werkuren - Sheet1.csv', 'r')
-jsonfile = open('uren.json', 'w')
+csvfile = open('/Users/lottegeereadts/PycharmProjects/data_processing/week_4/wellbein1.csv', 'r')
+jsonfile = open('/Users/lottegeereadts/PycharmProjects/data_processing/week_4/data1.json', 'w')
 
 # set names for the different values and fill the file
-fieldnames = ("maand", "uren")
-reader = csv.DictReader(csvfile, fieldnames)
+fieldnames = ("country", "region" , "average_life_expectancy", "average_well_being")
+reader = csv.DictReader(csvfile,  fieldnames)
 temp = []
 for row in reader:
     temp.append(row)
-json.dump(temp, jsonfile)
+json.dump(temp,  jsonfile)
 jsonfile.write('\n')
