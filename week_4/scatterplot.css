@@ -1,7 +1,22 @@
+/**
+* scatterplot.css
+* Lotte Geeraedts
+* Data Processing
+* Studentnummer: 10529748
+* Location: https://github.com/lottege/data_processing/blob/master/week_3/scatterplot.css
+*
+* This is the stylesheet used in scatterplot.html to make a scatterplot
+* using data from data1.json.
+*
+* To make this code, the website https://bl.ocks.org/mbostock/3887118 was frequently used.
+**/
+
+/* style of text in body */
 body {
   font: 10px sans-serif;
 }
 
+/* style of the axes */
 .axis path,
 .axis line {
   fill: none;
