@@ -11,11 +11,11 @@
 import json
 import csv
 
-csvfile = open('/Users/lottegeereadts/PycharmProjects/data_processing/week_4/wellbein1.csv', 'r')
-jsonfile = open('/Users/lottegeereadts/PycharmProjects/data_processing/week_4/data1.json', 'w')
+csvfile = open('/Users/lottegeereadts/PycharmProjects/data_processing/week_5/KNMI_20001231.txt', 'r')
+jsonfile = open('/Users/lottegeereadts/PycharmProjects/data_processing/week_5/data1.json', 'w')
 
 # set names for the different values and fill the file
-fieldnames = ("country", "region" , "average_life_expectancy", "average_well_being")
+fieldnames = ("Date1", "Avg", "Min", "Max")
 reader = csv.DictReader(csvfile,  fieldnames)
 temp = []
 for row in reader:

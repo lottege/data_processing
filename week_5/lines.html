@@ -1,0 +1,38 @@
+<!--
+lines.html
+Lotte Geeraedts
+Data Processing
+Studentnummer: 10529748
+Location: https://github.com/lottege/data_processing/blob/master/week_3/scatterplot.html
+
+This function uses scatterplot.js and scatterplot.css to plot an interactive scatterplot
+with data from data1.json showing the correlation between life expectancy and well being worldwide.
+
+To make this code, the website https://bl.ocks.org/mbostock/3887118 was frequently used.
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="//d3js.org/d3.v4.min.js"></script>
+        <script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <script src="lines.js"></script>
+        <link rel= stylesheet href="lines.css">
+    </head>
+    <body>
+        <div class="title">
+            <h3>Average, Min and Max Temperature</h3>
+            <h1>In the Netherlands </h1>
+            <h2>Lotte Geeraedts</h2>
+            <button id="Button" class="float-left submit-button" >2016</button>
+            <script type="text/javascript">
+                document.getElementById("Button").onclick = function () {
+                    location.href = "week_5/lines16.html";
+                };
+            </script>
+
+        </div>
+        <div class="chart"></div>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+.axis--x path {
+  display: none;
+}
+
+.line1 {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.line2 {
+  fill: none;
+  stroke: lightsteelblue;
+  stroke-width: 1.5px;
+}
+
+.line3 {
+  fill: none;
+  stroke: lightsteelblue;
+  stroke-width: 1.5px;
+}
