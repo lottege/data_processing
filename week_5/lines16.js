@@ -1,3 +1,15 @@
+/**
+* lines.js
+* Lotte Geeraedts
+* Data Processing
+* Studentnummer: 10529748
+* Location: https://github.com/lottege/data_processing/blob/master/week_5/lines16.js
+*
+* This function is used in lines.html to make a linegraph
+* using data from data2.json. This visualizes the rain in the year 2000
+*
+* To make this code, the website https://bl.ocks.org/mbostock/3887118 was frequently used.
+**/
 window.onload = function() {
     var svg = d3.select("chart"),
         margin = {top: 20, right: 80, bottom: 30, left: 50},
@@ -8,9 +20,11 @@ window.onload = function() {
 
     var parseTime = d3.timeParse("%Y%m%d");
 
+    // Set scales
     var x = d3.scaleTime().range([0, width]),
         y = d3.scaleLinear().range([height, 0]);
 
+    // Create three different lines
     var valueline1 = d3.line()
         .curve(d3.curveBasis)
         .x(function(d) { return x(d.Date1); })
@@ -37,7 +51,7 @@ window.onload = function() {
 
       var data = data[measure];
 
-      // format the data
+      // Format the data
       data.forEach(function(d) {
           d.Date1 = parseTime(d.Date1.replace(/\s/g, ''));
           d.Avg = +d.Avg.replace(/\s/g, '');
