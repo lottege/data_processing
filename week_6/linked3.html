@@ -1,0 +1,38 @@
+<!--
+linked3.html
+Lotte Geeraedts
+Data Processing
+Studentnummer: 10529748
+Location: https://github.com/lottege/data_processing/blob/master/week_6/linked3.html
+
+This function is used in linked5.js to make a linked barchart and piechart
+using data from this html file. This visualizes the grades I scored during the data processing course.
+
+To make this code, the website http://bl.ocks.org/NPashaP/96447623ef4d342ee09b was frequently used.
+-->
+
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="linked5.js"></script>
+    <link rel= stylesheet href="linked2.css">
+</head>
+<body>
+<h1> Grades data processing </h1>
+<h2> |      Lotte Geeraedts </h2>
+<div id='dashboard'>
+</div>
+
+<script>
+var gradeData=[
+{week:'week 1',grade:{scope:5, correctness:5, design:4, style:4}}
+,{week:'week 2',grade:{scope:4, correctness:5, design:3, style:3}}
+,{week:'week 3',grade:{scope:5, correctness:5, design:2, style:3}}
+,{week:'week 4',grade:{scope:5, correctness:4, design:3, style:3}}
+,{week:'week 5',grade:{scope:4, correctness:4, design:2, style:3}}
+];
+
+dashboard('#dashboard',gradeData);
+</script>
