@@ -11,6 +11,7 @@
 * To make this code, the website http://bl.ocks.org/NPashaP/96447623ef4d342ee09b was frequently used.
 **/
 
+
 // get data from html file
 function dashboard(id, fData){
     var barColor = '#F25D50';
