@@ -15,6 +15,17 @@ To make this code, the website http://bl.ocks.org/NPashaP/96447623ef4d342ee09b w
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
+    <script>
+    var gradeData=[
+    {week:'week 1',grade:{scope:5, correctness:5, design:4, style:4}}
+    ,{week:'week 2',grade:{scope:4, correctness:5, design:3, style:3}}
+    ,{week:'week 3',grade:{scope:5, correctness:5, design:2, style:3}}
+    ,{week:'week 4',grade:{scope:5, correctness:4, design:3, style:3}}
+    ,{week:'week 5',grade:{scope:4, correctness:4, design:2, style:3}}
+    ];
+    dashboard('#dashboard',gradeData);
+    </script>
+
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="linked5.js"></script>
     <link rel= stylesheet href="linked2.css">
@@ -24,15 +35,3 @@ To make this code, the website http://bl.ocks.org/NPashaP/96447623ef4d342ee09b w
 <h2> |      Lotte Geeraedts </h2>
 <div id='dashboard'>
 </div>
-
-<script>
-var gradeData=[
-{week:'week 1',grade:{scope:5, correctness:5, design:4, style:4}}
-,{week:'week 2',grade:{scope:4, correctness:5, design:3, style:3}}
-,{week:'week 3',grade:{scope:5, correctness:5, design:2, style:3}}
-,{week:'week 4',grade:{scope:5, correctness:4, design:3, style:3}}
-,{week:'week 5',grade:{scope:4, correctness:4, design:2, style:3}}
-];
-
-dashboard('#dashboard',gradeData);
-</script>
