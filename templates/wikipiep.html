@@ -1,0 +1,19 @@
+{% extends "wikipoem.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('history') }}" method="post">
+        <body text><P><h1>History</h1></P></body>
+    <table class="table">
+
+        {% for row in rows %}
+        <tr>
+            <td>{{ row }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+{% endblock %}
